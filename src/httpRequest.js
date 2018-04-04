@@ -5,6 +5,7 @@ const applicationType = 'application/vnd.api+json';
 
 /**
  * Calls the PUBG API and returns the JSON object.
+ * 
  * @param {string} token 
  * @param {URL} uri 
  * @param {function(Error, JSON)} done 

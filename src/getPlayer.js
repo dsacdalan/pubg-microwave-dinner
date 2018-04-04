@@ -4,8 +4,9 @@ var Player = require('./class/player');
 
 /**
  * Gets a single player from an ID and Platform Region.
- * @param {String} platformRegion 
- * @param {String} id
+ * 
+ * @param {string} platformRegion 
+ * @param {string} id
  * @param {function(Error, Player)} done - The callback that handles the response.
  */
 exports.getSinglePlayer = (token, platformRegion, id, done) => {

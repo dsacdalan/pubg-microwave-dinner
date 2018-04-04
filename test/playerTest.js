@@ -1,6 +1,6 @@
 const MicrowaveDinner = require('../index');
 const platformRegion = 'pc-na';
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJiNDg0MDZhMC0xYTJkLTAxMzYtZjFjOC00YjgzYjRkZTM4NzUiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNTIyODQzMjM0LCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6InB1YmctYmFja3BhY2siLCJzY29wZSI6ImNvbW11bml0eSIsImxpbWl0IjoxMH0.ixmBI9nx8OyCwe8OQ336c_JJ8lkHmUZ7XZorlFlFCvQ';
+const token = '';
 
 MicrowaveDinner.setToken(token);
 
