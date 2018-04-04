@@ -10,7 +10,7 @@ Install :
 Initialize:
 
 ```javascript
-cosnt microwaveDinner = require('pubg-microwave-dinner');
+const microwaveDinner = require('pubg-microwave-dinner');
 microwaveDinner.setToken('YOUR-API-TOKEN');
 
 microwaveDinner.getSinglePlayer('pc-na', 'account.1234', (err, player) => {
