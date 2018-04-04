@@ -1,6 +1,8 @@
 # Microwave Dinner
 This is a simple wrapper for the PUBG API.
 
+The only method currently supported is getting a single player.
+
 ## Quick Start
 
 Install :
