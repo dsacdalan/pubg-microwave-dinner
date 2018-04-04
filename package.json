@@ -10,6 +10,9 @@
     "type": "git",
     "url": "https://github.com/Dsacdalan/pubg-microwave-dinner"
   },
+  "keywords": [
+    "pubg"
+  ],
   "author": "Daniel Sacdalan",
   "license": "MIT",
   "dependencies": {
