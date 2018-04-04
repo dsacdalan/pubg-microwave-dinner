@@ -3,4 +3,4 @@ module.exports = class Match {
     this.id = data.id;
     this.type = data.type;
   }
-}
+};

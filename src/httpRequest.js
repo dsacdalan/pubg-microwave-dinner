@@ -1,7 +1,5 @@
 const request = require('request');
-
 const format = require('./format');
-const index = require('../index');
 
 function formatError(statusCode, body, done) {
   var error = JSON.parse(body).errors[0];
@@ -11,8 +9,8 @@ function formatError(statusCode, body, done) {
       : error.title;
   var detail =
     error.detail
-     ? error.detail
-     : '';
+      ? error.detail
+      : '';
 
   error = new Error(message);
   error.statusCode = statusCode;
@@ -34,10 +32,10 @@ exports.get = (token, uri, done) => {
     } else if (res.statusCode !== 200) {
       formatError(res.statusCode, body, (data) => {
         done(data);
-      })
+      });
     } else {
       var player = format.formatPlayer(body);
-      done(null, player)
+      done(null, player);
     }
-  })
-}
+  });
+};
