@@ -3,4 +3,4 @@ module.exports = class Links {
     this.schema = data.schema;
     this.self = data.self;
   }
-}
+};

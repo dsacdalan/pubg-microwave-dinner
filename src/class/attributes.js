@@ -6,4 +6,4 @@ module.exports = class Attributes {
     this.patchVersion = data.patchVersion;
     this.titleId = data.titleId;
   }
-}
+};

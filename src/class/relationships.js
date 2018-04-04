@@ -13,6 +13,6 @@ module.exports = class Relationships {
 
     this.matches = {
       'data': matchArray
-    }
+    };
   }
-}
+};
