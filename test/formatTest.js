@@ -14,7 +14,7 @@ describe('Format', function() {
     it('should return pc-na', function() {
       var platformRegion = 'BAD';
       var actual = format.platformRegion(platformRegion);
-      assert.equal(actual, platformRegion);
+      assert.equal(actual, 'pc-na');
     }) ;
   });
 });

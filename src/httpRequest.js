@@ -1,28 +1,19 @@
 const request = require('request');
 const format = require('./format');
 
-function formatError(statusCode, body, done) {
-  var error = JSON.parse(body).errors[0];
-  var message =
-    statusCode === 429
-      ? 'Too many requests'
-      : error.title;
-  var detail =
-    error.detail
-      ? error.detail
-      : '';
+const applicationType = 'application/vnd.api+json';
 
-  error = new Error(message);
-  error.statusCode = statusCode;
-  error.detail = detail;
-  done(error);
-}
-
+/**
+ * Calls the PUBG API and returns the JSON object.
+ * @param {string} token 
+ * @param {URL} uri 
+ * @param {function(Error, JSON)} done 
+ */
 exports.get = (token, uri, done) => {
   var options = {
     'headers': {
       'authorization': token,
-      'accept': 'application/vnd.api+json'
+      'accept': applicationType
     }
   };
 
@@ -30,12 +21,11 @@ exports.get = (token, uri, done) => {
     if (err) {
       done(err);
     } else if (res.statusCode !== 200) {
-      formatError(res.statusCode, body, (data) => {
-        done(data);
+      format.error(res.statusCode, body, (error) => {
+        done(error);
       });
     } else {
-      var player = format.formatPlayer(body);
-      done(null, player);
+      done(null, body);
     }
   });
 };

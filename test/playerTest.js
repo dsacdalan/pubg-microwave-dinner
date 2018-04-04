@@ -1,10 +1,11 @@
 const MicrowaveDinner = require('../index');
 const platformRegion = 'pc-na';
-const token = '';
+const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJiNDg0MDZhMC0xYTJkLTAxMzYtZjFjOC00YjgzYjRkZTM4NzUiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNTIyODQzMjM0LCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6InB1YmctYmFja3BhY2siLCJzY29wZSI6ImNvbW11bml0eSIsImxpbWl0IjoxMH0.ixmBI9nx8OyCwe8OQ336c_JJ8lkHmUZ7XZorlFlFCvQ';
 
 MicrowaveDinner.setToken(token);
 
 describe('Player', function() {
+  this.timeout(10000);
   describe('Get valid player', function() {
     it('should return data', function(done) {
       MicrowaveDinner.getSinglePlayer(platformRegion, 'account.6ea11c9dcec747f3ab57c829a129394c', (err) => {
@@ -13,13 +14,13 @@ describe('Player', function() {
       });
     });
   });
-  describe('Got player without a Platform Region', function() {
-    it('should default to PC-NA and continue'), function(done) {
-      MicrowaveDinner.getSinglePlayer('account.6ea11c9dcec747f3ab57c829a129394c', (err) => {
+  describe('Get valid player with invalid platform region', function() {
+    it('should defualt ot pc-na and return data', function(done) {
+      MicrowaveDinner.getSinglePlayer('bad', 'account.6ea11c9dcec747f3ab57c829a129394c', (err) => {
         if (err) done(err);
         else done();
       });
-    };
+    });
   });
   describe('Get invalid player', function() {
     it('should return a 404 error', function(done) {

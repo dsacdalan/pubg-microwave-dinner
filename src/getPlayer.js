@@ -1,10 +1,11 @@
 const format = require('./format');
 const httpRequest = require('./httpRequest');
+var Player = require('./class/player');
 
 /**
- * Gets a single player by their ID and Platform Region.
+ * Gets a single player from an ID and Platform Region.
  * @param {String} platformRegion 
- * @param {String} id 
+ * @param {String} id
  * @param {function(Error, Player)} done - The callback that handles the response.
  */
 exports.getSinglePlayer = (token, platformRegion, id, done) => {
@@ -14,8 +15,13 @@ exports.getSinglePlayer = (token, platformRegion, id, done) => {
   var endpoint = '/players/' + id;
   var uri = format.fullURI(formattedPlatformRegion, endpoint);
 
-  httpRequest.get(token, uri, (err, data) => {
-    if (err) done(err);
-    else done(null, data);
+  httpRequest.get(token, uri, (err, body) => {
+    if (err) {
+      done(err);
+    } else {
+      format.player(body, player => {
+        done(null, player);
+      });
+    }
   });
 };
