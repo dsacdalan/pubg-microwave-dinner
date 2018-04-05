@@ -1,28 +1,14 @@
 var Player = require('./class/player');
 
 const baseURL = 'https://api.playbattlegrounds.com/shards/';
-const platformRegionList = ['xbox-as','xbox-eu','xbox-na','xbox-oc','pc-krjp','pc-na','pc-eu','pc-oc','pc-kakao','pc-sea','pc-sa','pc-as'];
-
-/**
- * Validates that the Platform Region is correct, and defaults to pc-na if it is not.
- *
- * @param {string} platformRegion - One of the following:
- * xbox-as, xbox-eu, xbox-na, xbox-oc,
- * pc-krjp, pc-na, pc-eu, pc-oc, pc-kakao, pc-sea, pc-sa, or pc-as.
- */
-exports.platformRegion = (platformRegion) => {
-  if (platformRegionList.includes(platformRegion)) return platformRegion;
-  else return 'pc-na';
-};
 
 /**
  * Formats a player JSON string object to a Player object.
  * 
- * @param {JSON} body 
+ * @param {object} body 
  * @param {function(Player)} done
  */
-exports.player = (body, done) => {
-  var data = JSON.parse(body).data;
+exports.player = (data, done) => {
   var player = new Player(data);
   done(player);
 };
@@ -38,14 +24,13 @@ exports.fullURI = (platformRegion, endpoint) => {
 };
 
 /**
- * Formats HTTP errors.
+ * Formats API HTTP errors.
  * 
  * @param {number} statusCode 
- * @param {JSON} body 
+ * @param {object} error 
  * @param {function(Error)} done 
  */
-exports.error = (statusCode, body, done) => {
-  var error = JSON.parse(body).errors[0];
+exports.error = (statusCode, error, done) => {
   var message =
     statusCode === 429
       ? 'Too many requests'
@@ -59,4 +44,35 @@ exports.error = (statusCode, body, done) => {
   error.statusCode = statusCode;
   error.detail = detail;
   done(error);
+};
+
+/**
+ * Formats the Players endpoint.
+ * Defaults to the empty string if no ids or names are provided.
+ * 
+ * @param {string[]} ids 
+ * @param {string[]} names 
+ */
+exports.playersEndpoint = (ids, names, done) => {
+  if(ids) {
+    // IDs
+    var idList = ids.join(',');
+    var idFilter = '?filter[playerIds]=';
+    if (names) {
+      // IDs and Names
+      var nameList = names.join(',');
+
+      done(idFilter + idList + '&filter[playerNames]=' + nameList);
+    } else {
+      // IDs only
+      done(idFilter + idList);
+    }
+
+  } else if (names) {
+    // Names only
+    var onlyNameList = names.join(',');
+    done('?filter[playerNames]=' + onlyNameList);
+  } else {
+    done('');
+  }
 };

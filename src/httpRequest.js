@@ -8,7 +8,7 @@ const applicationType = 'application/vnd.api+json';
  * 
  * @param {string} token 
  * @param {URL} uri 
- * @param {function(Error, JSON)} done 
+ * @param {function(Error, object)} done 
  */
 exports.get = (token, uri, done) => {
   var options = {
@@ -22,11 +22,13 @@ exports.get = (token, uri, done) => {
     if (err) {
       done(err);
     } else if (res.statusCode !== 200) {
-      format.error(res.statusCode, body, (error) => {
+      var parsedError = JSON.parse(body).errors[0];
+      format.error(res.statusCode, parsedError, (error) => {
         done(error);
       });
     } else {
-      done(null, body);
+      var data = JSON.parse(body).data;      
+      done(null, data);
     }
   });
 };
