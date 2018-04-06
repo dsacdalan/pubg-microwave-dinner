@@ -87,11 +87,21 @@ describe('Platform Region', function() {
       assert.equal(actual, platformRegion);
     });
   });
+  describe('undefined', function() {
+    it('should default to pc-na', function() {
+      var actual = validate.platformRegion(undefined);
+      assert.equal(actual, 'pc-na');
+    });
+  });
   describe('bad', function() {
     it('should default to pc-na', function() {
       var platformRegion = 'bad';
-      var actual = validate.platformRegion(platformRegion);
-      assert.equal(actual, 'pc-na');
+      assert.throws(
+        () => {
+          validate.platformRegion(platformRegion);
+        },
+        Error
+      );
     });
   });
 });

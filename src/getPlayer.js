@@ -43,20 +43,21 @@ exports.getSinglePlayer = (token, platformRegion, id, done) => {
  * @param {*} done 
  */
 exports.getPlayers = (token, platformRegion, ids, names, done) => {
-  var uri = format.playersEndpoint(ids, names, (data) => {
-    var endpoint = '/players/' + data;
-    return format.fullURI(validatedPlatformRegion, endpoint);
-  });
   
   // Validate platform region and default to pc-na if necessary.
   var validatedPlatformRegion = validate.platformRegion(platformRegion);
 
-  httpRequest.get(token, uri, (err, data) => {
-    if (err) {
-      done(err);
-    } else {
-      // TODO: format Player list
-      done(null, data);
-    }
+  format.playersEndpoint(ids, names, (data) => {
+    var endpoint = '/players/' + data;
+    var uri = format.fullURI(validatedPlatformRegion, endpoint);
+
+    httpRequest.get(token, uri, (err, data) => {
+      if (err) {
+        done(err);
+      } else {
+        // TODO: format Player list
+        done(null, data);
+      }
+    });
   });
 };

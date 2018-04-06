@@ -8,6 +8,12 @@ const platformRegionList = ['xbox-as','xbox-eu','xbox-na','xbox-oc','pc-krjp','p
  * pc-krjp, pc-na, pc-eu, pc-oc, pc-kakao, pc-sea, pc-sa, or pc-as.
  */
 exports.platformRegion = (platformRegion) => {
-  if (platformRegionList.includes(platformRegion)) return platformRegion;
-  else return 'pc-na';
+  
+  if(platformRegion === undefined) {
+    return 'pc-na';
+  } else if (platformRegionList.includes(platformRegion)) {
+    return platformRegion;
+  } else {
+    throw new Error('Invalid platform region');
+  } 
 };
