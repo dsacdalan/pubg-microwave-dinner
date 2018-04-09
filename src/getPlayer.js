@@ -2,6 +2,8 @@ const format = require('./format');
 const validate = require('./validate');
 
 const httpRequest = require('./httpRequest');
+
+// eslint-disable-next-line no-unused-vars
 var Player = require('./class/player');
 
 /**
@@ -55,8 +57,9 @@ exports.getPlayers = (token, platformRegion, ids, names, done) => {
       if (err) {
         done(err);
       } else {
-        // TODO: format Player list
-        done(null, data);
+        format.players(data, players => {
+          done(null, players);
+        });
       }
     });
   });

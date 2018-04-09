@@ -13,6 +13,11 @@ exports.player = (data, done) => {
   done(player);
 };
 
+exports.players = (data, done) => {
+  var players = data.map(n => new Player(n));
+  done(players);
+};
+
 /**
  * Formats the full URI from the Platform Region and endpoint.
  * 
@@ -73,6 +78,7 @@ exports.playersEndpoint = (ids, names, done) => {
     var onlyNameList = names.join(',');
     done('?filter[playerNames]=' + onlyNameList);
   } else {
+    // No filter
     done('');
   }
 };

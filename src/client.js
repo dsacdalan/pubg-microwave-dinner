@@ -1,7 +1,8 @@
 const getPlayer = require('./getPlayer');
 const validate = require('./validate');
 
-const Player = require('./class/player');
+// eslint-disable-next-line no-unused-vars
+const Player = require('./class/player'); 
 
 module.exports = class Client {
   /**
@@ -43,6 +44,28 @@ module.exports = class Client {
     getPlayer.getSinglePlayer(this.key, currentPlatformRegion, args.id, (err, player) => {
       if(err) done(err);
       else done(null, player);
+    });
+  }
+
+  /**
+   * Gets a collection of  players 
+   * from an ID and/or name array and Platform Region.
+   * 
+   * @param {object} args 
+   * @param {string} [args.playerIds]
+   * @param {string} [args.playerNames]
+   * @param {function(Error, Player[])} done 
+   */
+  getPlayers(args, done) {
+    // TODO: arg validation
+
+    var currentPlatformRegion = args.platformRegion
+      ? args.platformRegion
+      : this.platformRegion;
+
+    getPlayer.getPlayers(this.key, currentPlatformRegion, args.playerIds, args.playerNames, (err, players) => {
+      if(err) done(err);
+      else done(null, players);
     });
   }
 };
