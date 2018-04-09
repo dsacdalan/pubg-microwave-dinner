@@ -5,7 +5,7 @@ const baseURL = 'https://api.playbattlegrounds.com/shards/';
 /**
  * Formats a player JSON string object to a Player object.
  * 
- * @param {object} body 
+ * @param {object} data 
  * @param {function(Player)} done
  */
 exports.player = (data, done) => {
@@ -13,6 +13,12 @@ exports.player = (data, done) => {
   done(player);
 };
 
+/**
+ * Formtas a player JSON string array object to a Player[].
+ * 
+ * @param {object} data 
+ * @param {function(Player[])} done 
+ */
 exports.players = (data, done) => {
   var players = data.map(n => new Player(n));
   done(players);

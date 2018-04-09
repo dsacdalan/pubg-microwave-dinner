@@ -1,7 +1,7 @@
 # Microwave Dinner
 This is a simple wrapper for the PUBG API.
 
-The only method currently supported is getting a single player.
+Currently, the wrapper supports both player enpoints.
 
 ## Quick Start
 
@@ -13,9 +13,13 @@ Initialize:
 
 ```javascript
 const microwaveDinner = require('pubg-microwave-dinner');
-microwaveDinner.setToken('YOUR-API-TOKEN');
+const client = new microwaveDinner.Client('YOUR-API-TOKEN', 'pc-na');
 
-microwaveDinner.getSinglePlayer('pc-na', 'account.1234', (err, player) => {
-  console.log(player.attributes.name);
+var args = {
+  playerId: 'account.123'
 }
+
+client.getSinglePlayer(args, (err, player) => {
+  console.log(player.attributes.name);
+});
 ```

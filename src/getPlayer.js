@@ -1,6 +1,5 @@
 const format = require('./format');
 const validate = require('./validate');
-
 const httpRequest = require('./httpRequest');
 
 // eslint-disable-next-line no-unused-vars
@@ -9,21 +8,21 @@ var Player = require('./class/player');
 /**
  * Gets a single player from an ID and Platform Region.
  * 
- * @param {string} token 
+ * @param {string} key 
  * @param {string} platformRegion - One of the following:
  * xbox-as, xbox-eu, xbox-na, xbox-oc,
  * pc-krjp, pc-na, pc-eu, pc-oc, pc-kakao, pc-sea, pc-sa, or pc-as.
  * @param {string} id - The player id.
  * @param {function(Error, Player)} done - The callback that handles the response.
  */
-exports.getSinglePlayer = (token, platformRegion, id, done) => {
+exports.getSinglePlayer = (key, platformRegion, id, done) => {
   // Validate platform region and default to pc-na if necessary.
   var validatedPlatformRegion = validate.platformRegion(platformRegion);
   
   var endpoint = '/players/' + id;
   var uri = format.fullURI(validatedPlatformRegion, endpoint);
 
-  httpRequest.get(token, uri, (err, data) => {
+  httpRequest.get(key, uri, (err, data) => {
     if (err) {
       done(err);
     } else {

@@ -1,12 +1,15 @@
 const getPlayer = require('../src/getPlayer');
 
-var key = '';
+// eslint-disable-next-line no-unused-vars
+const dotenv = require('dotenv').config();
+
+var key = process.env.API_KEY;
 var platformRegion = 'pc-na';
 
 var id = 'account.6ea11c9dcec747f3ab57c829a129394c';
-var id2 = 'account.9b0ef7539c2d424ea235d8c0f63e60b7';
+var id2 = 'account.068e0cb30d524573ac38958094968d51';
 var name = 'cheeseter550';
-var name2 = 'Papaleguas_TX';
+var name2 = 'Zaith5';
 
 var singlePlayerId = [id];
 var singlePlayerId2 = [id2];
@@ -19,7 +22,7 @@ describe('GetPlayer', function() {
   describe('Get single player', function() {
     describe('valid player id', function() {
       it('should return data', function(done) {
-        getPlayer.getSinglePlayer(key, platformRegion, id, (err, player) => {
+        getPlayer.getSinglePlayer(key, platformRegion, id, (err) => {
           if (err) done(err);
           else done();
         });
@@ -30,7 +33,7 @@ describe('GetPlayer', function() {
   describe('Get multiple players', function() {
     describe('single player name', function() {
       it('should return data', function(done) {
-        getPlayer.getPlayers(key, platformRegion, null, singleAccountName, (err, data) => {
+        getPlayer.getPlayers(key, platformRegion, null, singleAccountName, (err) => {
           if (err) done(err);
           else done();
         });
@@ -38,7 +41,7 @@ describe('GetPlayer', function() {
     });
     describe('single player id', function() {
       it('should return data', function(done) {
-        getPlayer.getPlayers(key, platformRegion, singlePlayerId, null, (err, data) => {
+        getPlayer.getPlayers(key, platformRegion, singlePlayerId, null, (err) => {
           if (err) done(err);
           else done();
         });
@@ -47,7 +50,7 @@ describe('GetPlayer', function() {
 
     describe('multiple player names', function() {
       it('should return data', function(done) {
-        getPlayer.getPlayers(key, platformRegion, null, accountNames, (err, data) => {
+        getPlayer.getPlayers(key, platformRegion, null, accountNames, (err) => {
           if (err) done(err);
           else done();
         });
@@ -56,15 +59,7 @@ describe('GetPlayer', function() {
 
     describe('multiple player ids', function() {
       it('should return data', function(done) {
-        getPlayer.getPlayers(key, platformRegion, accountIds, null, (err, data) => {
-          if (err) done(err);
-          else done();
-        });
-      });
-    });
-    describe('player id and player name', function() {
-      it('should return data', function(done) {
-        getPlayer.getPlayers(key, platformRegion, singlePlayerId2, singleAccountName, (err, data) => {
+        getPlayer.getPlayers(key, platformRegion, accountIds, null, (err) => {
           if (err) done(err);
           else done();
         });

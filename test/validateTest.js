@@ -1,7 +1,6 @@
 const assert = require('assert');
 const validate = require('../src/validate');
 
-
 describe('Platform Region', function() {
   describe('xbox-as', function() {
     it('should return itself', function() {

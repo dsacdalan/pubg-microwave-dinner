@@ -6,14 +6,14 @@ const applicationType = 'application/vnd.api+json';
 /**
  * Calls the PUBG API and returns the JSON object.
  * 
- * @param {string} token 
+ * @param {string} key 
  * @param {URL} uri 
  * @param {function(Error, object)} done 
  */
-exports.get = (token, uri, done) => {
+exports.get = (key, uri, done) => {
   var options = {
     'headers': {
-      'authorization': token,
+      'authorization': key,
       'accept': applicationType
     }
   };

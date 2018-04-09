@@ -1,5 +1,6 @@
 /node_modules
 /.vscode
 
-token.txt
+.env
+
 index2.js
