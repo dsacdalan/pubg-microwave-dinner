@@ -121,3 +121,43 @@ client.getMatch(args, (err, match) => {
 *done(err, match)*
 * **err**: If call was unsuccessful, an Error object will be returned. If it was successful, it will return null.
 * **match**: If call was successful, a Match object will be returned.
+
+### Objects
+Microwave dinner includes classes for all API objects:
+
+#### Player
+Player objects contain aggregated lifetime information about each player.
+
+* type - player
+* id - Player ID
+* attributes (PlayerAttributes)
+  * name - Player name
+  * shardId - Platform-region shard
+  * stats - N/A (currently not used)
+  * createdAt
+  * patchVersion - Version of teh game
+  * titleId - Identifies the studio and the game
+* relationships (PlayerRelationships) - References to resource objects related to this player
+  * assets - N/A (currently not used)
+  * matches 
+    * data - A list of match ids
+      * id - The ID of the match
+      * type - Identifier for this object type ("match")
+* links
+  * schema - N/A (currently not used)
+  * self - Link to this object
+
+#### Match
+Match objects contain the results of a completed match such as the game mode played, duration, and which players participated.
+
+* type - match
+* id - Match ID
+* attributes
+  * createdAt - Time of match completion
+  * duration - Lenght of the match
+  * gameMode - Game mode played (duo, duo-fpp, solo, solo-fpp, squad, squad-fpp)
+  * patchVersion - N/A (currently not used)
+  * shardId - Platform-region shard
+  * stats - N/A (currently not used)
+  * tags - Searchable tags
+  * titleId - Identifies the studio and game
