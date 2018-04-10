@@ -1,7 +1,112 @@
 const assert = require('assert');
 const validate = require('../src/validate');
 
-describe('Platform Region', function() {
+describe('Validate GetPlayer', function() {
+  describe('valid args with platform region', function() {
+    it('should not throw an error', function() {
+      var args = {
+        playerId: 'account.1234',
+        platformRegion: 'pc-na'
+      };
+      validate.getPlayerArgs(args);
+    });
+  });
+  describe('valid args without platform region', function() {
+    it('should not throw an error', function() {
+      var args = {
+        playerId: 'account.1234'
+      };
+      validate.getPlayerArgs(args);
+    });
+  });
+  describe('invalid args', function() {
+    it('should throw an error', function() {
+      var args = {
+        bad: [100]
+      };
+      assert.throws(
+        () => {
+          validate.getPlayerArgs(args);
+        },
+        Error
+      );
+    });
+  });
+});
+
+describe('Validate GetPlayers', function() {
+  describe('valid args with platform region', function() {
+    it('should not throw an error', function() {
+      var args = {
+        playerIds: ['id'],
+        playerNames: ['name'],
+        platformRegion: 'pc-na'
+      };
+      validate.getPlayersArgs(args);
+    });
+  });
+  describe('valid args without platform region', function() {
+    it('should not throw an error', function() {
+      var args = {
+        playerIds: ['id'],
+        playerNames: ['name']
+      };
+      validate.getPlayersArgs(args);
+    });
+  });
+  describe('valid args without Ids or platform region', function() {
+    it('should not throw an error', function() {
+      var args = {
+        playerNames: ['name']
+      };
+      validate.getPlayersArgs(args);
+    });
+  });
+  describe('valid args without Names or platform region', function() {
+    it('should not throw an error', function() {
+      var args = {
+        playerIds: ['id']
+      };
+      validate.getPlayersArgs(args);
+    });
+  });
+});
+
+describe('Validate GetMatch', function() {
+  describe('valid args with platform region', function() {
+    it('should not throw an error', function() {
+      var args = {
+        matchId: 'account.1234',
+        platformRegion: 'pc-na'
+      };
+      validate.getMatchArgs(args);
+    });
+  });
+  describe('valid args without platform region', function() {
+    it('should not throw an error', function() {
+      var args = {
+        matchId: 'account.1234'
+      };
+      validate.getMatchArgs(args);
+    });
+  });
+  describe('invalid args', function() {
+    it('should throw an error', function() {
+      var args = {
+        bad: 'account.123'
+      };
+      assert.throws(
+        () => {
+          validate.getPlayerArgs(args);
+        },
+        Error
+      );
+    });
+  });
+});
+
+
+describe('Validate Platform Region', function() {
   describe('xbox-as', function() {
     it('should return itself', function() {
       var platformRegion = 'xbox-as';

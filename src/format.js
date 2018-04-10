@@ -90,8 +90,6 @@ exports.playersEndpoint = (ids, names, done) => {
 };
 
 exports.match = (data, done) => {
-  var match = new Match(data.data);
-  var included = data.included;
-  var links = data.links;
+  var match = new Match(data);
   done(match);
 };

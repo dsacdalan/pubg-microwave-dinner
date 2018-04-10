@@ -35,13 +35,10 @@ module.exports = class Client {
    * @param {function(Error, Player)} done 
    */
   getSinglePlayer(args, done)  {
-    if (typeof args.playerId !== 'string' || (args.platformRegion !== undefined && typeof args.platformRegion !== 'string')) {
-      throw new Error('The function getSinglePlayer requires the id and platform region to be of type string.');
-    }
-
+    validate.getPlayerArgs(args);
     var currentPlatformRegion = args.platformRegion
       ? args.platformRegion
-      : this.platformRegion;
+      : validate.platformRegion(this.platformRegion);
 
     getPlayer.getSinglePlayer(this.key, currentPlatformRegion, args.playerId, (err, player) => {
       if(err) done(err);
@@ -54,16 +51,17 @@ module.exports = class Client {
    * from a Player ID and/or Player Name array and Platform Region.
    * 
    * @param {object} args 
-   * @param {string} [args.playerIds]
-   * @param {string} [args.playerNames]
+   * @param {string[]} [args.playerIds]
+   * @param {string[]} [args.playerNames]
+   * @param {string} [args.platformRegion]
    * @param {function(Error, Player[])} done 
    */
   getPlayers(args, done) {
-    // TODO: arg validation
+    validate.getPlayersArgs(args);    
 
     var currentPlatformRegion = args.platformRegion
       ? args.platformRegion
-      : this.platformRegion;
+      : validate.platformRegion(this.platformRegion);
 
     getPlayer.getPlayers(this.key, currentPlatformRegion, args.playerIds, args.playerNames, (err, players) => {
       if(err) done(err);
@@ -81,7 +79,7 @@ module.exports = class Client {
   getMatch(args, done) {
     var currentPlatformRegion = args.platformRegion
       ? args.platformRegion
-      : this.platformRegion;
+      : validate.platformRegion(this.platformRegion);
 
     getMatch.getMatch(this.key, currentPlatformRegion, args.matchId, (err, match) => {
       if(err) done(err);
