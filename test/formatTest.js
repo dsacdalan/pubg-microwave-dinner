@@ -63,7 +63,6 @@ describe('Format Error', function() {
   });
 });
 
-
 describe('Format Players Endpoint', function() {
   describe('filter on PlayerIds', function() {
     it('should return a valid endpoint', function(done) {

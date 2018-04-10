@@ -1,6 +1,6 @@
 {
   "name": "pubg-microwave-dinner",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Simple wrapper for the PUBG API.",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,8 @@
   },
   "keywords": [
     "pubg",
-    "wrapper"
+    "wrapper",
+    "chicken dinner"
   ],
   "author": "Daniel Sacdalan",
   "license": "MIT",

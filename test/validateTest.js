@@ -105,7 +105,6 @@ describe('Validate GetMatch', function() {
   });
 });
 
-
 describe('Validate Platform Region', function() {
   describe('xbox-as', function() {
     it('should return itself', function() {

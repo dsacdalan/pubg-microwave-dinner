@@ -1,6 +1,7 @@
 var Player = require('./class/player/player');
 var Match = require('./class/match/match');
 const baseURL = 'https://api.playbattlegrounds.com/shards/';
+const parseMessage = 'Data could not be parsed.';
 
 /**
  * Formats a player JSON string object to a Player object.
@@ -9,8 +10,13 @@ const baseURL = 'https://api.playbattlegrounds.com/shards/';
  * @param {function(Player)} done
  */
 exports.player = (data, done) => {
-  var player = new Player(data.data);
-  done(player);
+  try {
+    var player = new Player(data.data);
+    done(player);
+  }
+  catch (err) {
+    throw new Error(parseMessage);
+  }
 };
 
 /**
@@ -22,6 +28,22 @@ exports.player = (data, done) => {
 exports.players = (data, done) => {
   var players = data.data.map(n => new Player(n));
   done(players);
+};
+
+/**
+ * Formats a match JSON string object to a Match object.
+ * 
+ * @param {object} data 
+ * @param {function(Match)} done 
+ */
+exports.match = (data, done) => {
+  try {
+    var match = new Match(data);
+    done(match);
+  }
+  catch(err) {
+    throw new Error(parseMessage);
+  }
 };
 
 /**
@@ -89,7 +111,3 @@ exports.playersEndpoint = (ids, names, done) => {
   }
 };
 
-exports.match = (data, done) => {
-  var match = new Match(data);
-  done(match);
-};
