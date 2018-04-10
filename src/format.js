@@ -1,5 +1,5 @@
-var Player = require('./class/player');
-
+var Player = require('./class/player/player');
+var Match = require('./class/match/match');
 const baseURL = 'https://api.playbattlegrounds.com/shards/';
 
 /**
@@ -9,7 +9,7 @@ const baseURL = 'https://api.playbattlegrounds.com/shards/';
  * @param {function(Player)} done
  */
 exports.player = (data, done) => {
-  var player = new Player(data);
+  var player = new Player(data.data);
   done(player);
 };
 
@@ -20,7 +20,7 @@ exports.player = (data, done) => {
  * @param {function(Player[])} done 
  */
 exports.players = (data, done) => {
-  var players = data.map(n => new Player(n));
+  var players = data.data.map(n => new Player(n));
   done(players);
 };
 
@@ -87,4 +87,11 @@ exports.playersEndpoint = (ids, names, done) => {
     // No filter
     done('');
   }
+};
+
+exports.match = (data, done) => {
+  var match = new Match(data.data);
+  var included = data.included;
+  var links = data.links;
+  done(match);
 };

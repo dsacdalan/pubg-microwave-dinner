@@ -3,7 +3,7 @@ const validate = require('./validate');
 const httpRequest = require('./httpRequest');
 
 // eslint-disable-next-line no-unused-vars
-var Player = require('./class/player');
+var Player = require('./class/player/player');
 
 /**
  * Gets a single player from an ID and Platform Region.
@@ -16,11 +16,8 @@ var Player = require('./class/player');
  * @param {function(Error, Player)} done - The callback that handles the response.
  */
 exports.getSinglePlayer = (key, platformRegion, id, done) => {
-  // Validate platform region and default to pc-na if necessary.
-  var validatedPlatformRegion = validate.platformRegion(platformRegion);
-  
   var endpoint = '/players/' + id;
-  var uri = format.fullURI(validatedPlatformRegion, endpoint);
+  var uri = format.fullURI(platformRegion, endpoint);
 
   httpRequest.get(key, uri, (err, data) => {
     if (err) {
@@ -44,13 +41,9 @@ exports.getSinglePlayer = (key, platformRegion, id, done) => {
  * @param {*} done 
  */
 exports.getPlayers = (token, platformRegion, ids, names, done) => {
-  
-  // Validate platform region and default to pc-na if necessary.
-  var validatedPlatformRegion = validate.platformRegion(platformRegion);
-
   format.playersEndpoint(ids, names, (data) => {
     var endpoint = '/players/' + data;
-    var uri = format.fullURI(validatedPlatformRegion, endpoint);
+    var uri = format.fullURI(platformRegion, endpoint);
 
     httpRequest.get(token, uri, (err, data) => {
       if (err) {

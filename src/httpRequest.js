@@ -27,7 +27,7 @@ exports.get = (key, uri, done) => {
         done(error);
       });
     } else {
-      var data = JSON.parse(body).data;      
+      var data = JSON.parse(body);
       done(null, data);
     }
   });

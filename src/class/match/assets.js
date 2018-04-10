@@ -1,6 +1,6 @@
-module.exports = class Match {
+module.exports = class Assets {
   constructor(data) {
-    this.id = data.id;
     this.type = data.type;
+    this.id = data.id;
   }
 };

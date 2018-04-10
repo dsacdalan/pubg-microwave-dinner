@@ -1,4 +1,4 @@
-module.exports = class Attributes {
+module.exports = class PlayerAttributes {
   constructor(data) {
     this.name = data.name;
     this.shardId = data.shardId;

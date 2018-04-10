@@ -1,8 +1,11 @@
 const getPlayer = require('./getPlayer');
+const getMatch = require('./getMatch');
 const validate = require('./validate');
 
 // eslint-disable-next-line no-unused-vars
-const Player = require('./class/player'); 
+var Player = require('./class/player/player'); 
+// eslint-disable-next-line no-unused-vars
+var Match = require('./class/match/match');
 
 module.exports = class Client {
   /**
@@ -65,6 +68,24 @@ module.exports = class Client {
     getPlayer.getPlayers(this.key, currentPlatformRegion, args.playerIds, args.playerNames, (err, players) => {
       if(err) done(err);
       else done(null, players);
+    });
+  }
+
+  /**
+   * 
+   * @param {object} args 
+   * @param {string} args.matchId
+   * @param {string} [args.platformRegion]
+   * @param {function(Error, Match)} done 
+   */
+  getMatch(args, done) {
+    var currentPlatformRegion = args.platformRegion
+      ? args.platformRegion
+      : this.platformRegion;
+
+    getMatch.getMatch(this.key, currentPlatformRegion, args.matchId, (err, match) => {
+      if(err) done(err);
+      else done(null, match);
     });
   }
 };
