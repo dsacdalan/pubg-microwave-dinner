@@ -22,7 +22,7 @@ const microwaveDinner = require('pubg-microwave-dinner');
 const client = new microwaveDinner.client('YOUR-API-TOKEN', 'pc-na');
 
 var args = {
-  playerId: 'account.123'
+  playerId: 'account.6ea21c9dcec447f3ab57c829a129394c'
 }
 
 client.getSinglePlayer(args, (err, player) => {
