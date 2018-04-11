@@ -2,8 +2,6 @@ var Player = require('./class/player/player');
 var Match = require('./class/match/match');
 var Status = require('./class/status/status');
 
-const parseMessage = 'Data could not be parsed.';
-
 /**
  * Formats a player JSON string object to a Player object.
  * 

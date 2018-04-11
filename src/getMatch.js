@@ -40,5 +40,5 @@ exports.filterMatchIncludes = (match, filter, done) => {
   
   // TODO: Validate filter
 
-  done(match.included.filter(type => filter.includes(type)));
+  done(null, match.included.filter(type => filter.includes(type)));
 };

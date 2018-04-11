@@ -1,8 +1,6 @@
 const https = require('https');
 const format = require('./format');
 
-const applicationType = 'application/vnd.api+json';
-
 /**
  * Calls the PUBG API and returns the JSON object.
  * 
@@ -16,7 +14,7 @@ exports.get = (key, path, done) => {
     path: path,
     method: 'GET',
     headers: {
-      'accept': applicationType
+      'accept': 'application/vnd.api+json'
     }
   };
   
@@ -32,7 +30,10 @@ exports.get = (key, path, done) => {
 
     res.on('end', () => {
       if (res.statusCode !== 200) {
-        var parsedError = JSON.parse(output).errors[0];
+        var parsedError = (res.statusCode === 429)
+          ? {'title': 'Too many requests'}
+          : JSON.parse(output).errors[0];
+
         format.error(res.statusCode, parsedError, (error) => {
           done(error);
         });
