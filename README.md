@@ -2,17 +2,24 @@
 This is a simple wrapper for the PUBG API v1.0.
 All objects have have been defined so your IDE can show that yummy autocomplete.
 
+* [Quick Start](#quick-start)
+* [Reference](#reference)
+  * [Client](#client())
+  * [Client Methods](#methods)
+* [Classes](#classes)
+  * [Player](#player)
+  * [Match](#match)
 ## Quick Start
 
 Install :
 
-`npm i pubg-microwave-dinner --save`
+`npm i pubg-microwave-dinner`
 
 Initialize:
 
 ```javascript
 const microwaveDinner = require('pubg-microwave-dinner');
-const client = new microwaveDinner.Client('YOUR-API-TOKEN', 'pc-na');
+const client = new microwaveDinner.client('YOUR-API-TOKEN', 'pc-na');
 
 var args = {
   playerId: 'account.123'
@@ -23,15 +30,15 @@ client.getSinglePlayer(args, (err, player) => {
 });
 ```
 
-## Reference
-### Client()
+# Reference
+## client()
 Creates a Microwave Dinner application.
 ```javascript 
 const microwaveDinner = require('pubg-microwave-dinner');
-const client = new microwaveDinner.Client('YOUR-API-TOKEN', 'pc-na');
+const client = new microwaveDinner.client('YOUR-API-TOKEN', 'pc-na');
 ```
 
-#### Client(key, [platformRegion])
+### client(key, [platformRegion])
 This is how to initialize the Microwave Dinner client.
 * **key {string}**: Your application key from the Offical PUBG API. If you do not have a key yet, [register](https://developer.playbattlegrounds.com/) to get yours today.
 * **platformRegion {string}**: One of the current PUBG platform regions. If a value is not provided the applicaiton will default to pc-na. The following are the current Platform Regions:
@@ -50,14 +57,14 @@ This is how to initialize the Microwave Dinner client.
     * pc-sa
     * pc-as
   
-### Methods
+## Methods
 
-#### client.getSinglePlayer(args, done)
+### client.getSinglePlayer(args, done)
 Gets a single player.
 
 ```javascript
 var args = {
-  playerId = 'account.1234',
+  playerId = 'account.6ea21c9dcec447f3ab57c829a129394c',
   platformRegion = 'pc-na'
 };
 
@@ -73,14 +80,15 @@ client.getSinglePlayer(args, (err, player) => {
 * **platformRegion {string}**: One of the current PUBG platform regions. Will default to the application's default if none is provided.
 
 *done(err, player)*
-* **err**: If call was unsuccessful, an Error object will be returned. If it was successful, it will return null.
-* **player**: If call was successful, a Player object will be returned.
+* **err**: If the call was unsuccessful, an Error object will be returned. If it was successful, it will return null.
+* **player**: If the call was successful, a Player object will be returned.
 
-#### client.getPlayers(args, done)
+### client.getPlayers(args, done)
 Gets a list of players.
 ```javascript
 var args = {
-  playerIds = ['account.1234', 'account.4567'],
+  playerIds = ['account.6ea21c9dcec447f3ab57c829a129394c'
+              ,'account.b57c829a129394c6ea21c9dcec447f3a'],
   platformRegion = 'pc-na'
 };
 
@@ -96,14 +104,14 @@ client.getPlayers(args, (err, players) => {
 * **platformRegion {string}**: One of the current PUBG platform regions. Will default to the application's default if none is provided.
 
 *done(err, players)*
-* **err**: If call was unsuccessful, an Error object will be returned. If it was successful, it will return null.
-* **players**: If call was successful, a Player array will be returned.
+* **err**: If the call was unsuccessful, an Error object will be returned. If it was successful, it will return null.
+* **players**: If the call was successful, a Player array will be returned.
 
-#### client.getMatch(args, done)
+### client.getMatch(args, done)
 Gets a match.
 ```javascript
 var args = {
-  matchId = 'd1b1b6e7-b93f-454a-bd81-dca8f46a6068',
+  matchId = '2cd71251-2a67-41f2-8cd3-f880e45f14ef',
   platformRegion = 'pc-na'
 };
 
@@ -119,45 +127,80 @@ client.getMatch(args, (err, match) => {
 * **platformRegion {string}**: One of the current PUBG platform regions. Will default to the application's default if none is provided.
 
 *done(err, match)*
-* **err**: If call was unsuccessful, an Error object will be returned. If it was successful, it will return null.
-* **match**: If call was successful, a Match object will be returned.
+* **err**: If the call was unsuccessful, an Error object will be returned. If it was successful, it will return null.
+* **match**: If the call was successful, a Match object will be returned.
 
-### Objects
+### client.getStatus(done)
+Gets the status of the API. 
+```javascript
+client.getStatus((err, status) => {
+  if(!err) {
+    console.log(status.attributes.version);
+  } 
+});
+```
+
+*done(err, status)*
+* **err**: If the call was unsuccessful, an Error object will be returned. If it was successful, it will return null.
+* **status**: If the call was successful, a Status object will be returned.
+
+# Classes
 Microwave dinner includes classes for all API objects:
 
-#### Player
+## Player
 Player objects contain aggregated lifetime information about each player.
 
-* type - player
-* id - Player ID
-* attributes (PlayerAttributes)
-  * name - Player name
-  * shardId - Platform-region shard
-  * stats - N/A (currently not used)
-  * createdAt
-  * patchVersion - Version of teh game
-  * titleId - Identifies the studio and the game
-* relationships (PlayerRelationships) - References to resource objects related to this player
-  * assets - N/A (currently not used)
-  * matches 
-    * data - A list of match ids
-      * id - The ID of the match
-      * type - Identifier for this object type ("match")
-* links
-  * schema - N/A (currently not used)
-  * self - Link to this object
+* **type** - Identifier for this object type ("player")
+* **id** - Player ID
+* **attributes** (PlayerAttributes)
+  * **name** - Player name
+  * **shardId** - Platform-region shard
+  * **stats** - N/A (currently not used)
+  * **createdAt**
+  * **patchVersion** - Version of the game
+  * **titleId** - Identifies the studio and the game
+* **relationships** (PlayerRelationships) - References to resource objects related to this player
+  * **assets** - N/A (currently not used)
+  * **matches** 
+    * **data** - A list of match ids
+      * **type** - Identifier for this object type ("match")    
+      * **id** - The ID of the match
+* **links**
+  * **schema** - N/A (currently not used)
+  * **self** - Link to this object
 
-#### Match
+## Match
 Match objects contain the results of a completed match such as the game mode played, duration, and which players participated.
 
-* type - match
-* id - Match ID
-* attributes
-  * createdAt - Time of match completion
-  * duration - Lenght of the match
-  * gameMode - Game mode played (duo, duo-fpp, solo, solo-fpp, squad, squad-fpp)
-  * patchVersion - N/A (currently not used)
-  * shardId - Platform-region shard
-  * stats - N/A (currently not used)
-  * tags - Searchable tags
-  * titleId - Identifies the studio and game
+* **type** - match
+* **id** - Match ID
+* **data** (MatchData)
+  * **attributes** (MatchAttributes)
+    * **createdAt** - Time of match completion
+    * **duration** - Length of the match
+    * **gameMode** - Game mode played (duo, duo-fpp, solo, solo-fpp, squad, squad-fpp)
+    * **patchVersion** - N/A (currently not used)
+    * **shardId** - Platform-region shard
+    * **stats** - N/A (currently not used)
+    * **tags** - Searchable tags
+    * **titleId** - Identifies the studio and game
+  * **relationships** (MatchRelationships)
+    * **assets** - A list of Asset IDs
+      * **type** - Identifier for this object type ("asset")
+      * **id** - The ID of the asset
+    * **roster** - A list of Roster IDs
+      * **type** - Identifier for this object type ("roster")
+      * **id** - The ID of the roster
+    * **rounds** - N/A (currently not used)
+    * **spectators** - N/A (currently not used)
+  * **links**
+    * **schmea**
+    * **self**
+* **included** - A list of [Roster](#roster), [Participant](#participant) or [Asset](#asset) objects.
+* **links**
+
+## Roster
+
+## Participant
+
+## Asset
