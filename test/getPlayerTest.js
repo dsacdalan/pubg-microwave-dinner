@@ -17,8 +17,8 @@ var accountNames = [name, name2];
 var accountIds = [id, id2];
 
 describe('GetPlayer', function() {
+  this.timeout(0);
   describe('getSinglePlayer', function() {
-    this.timeout(0);  
     describe('valid player id', function() {
       it('should return data', function(done) {
         getPlayer.getSinglePlayer(key, platformRegion, id, (err) => {
@@ -30,7 +30,6 @@ describe('GetPlayer', function() {
   });
   
   describe('getPlayers', function() {
-    this.timeout(0);  
     describe('single player name', function() {
       it('should return data', function(done) {
         getPlayer.getPlayers(key, platformRegion, null, singleAccountName, (err) => {

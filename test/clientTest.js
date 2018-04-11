@@ -1,4 +1,3 @@
-const assert = require('assert');
 const microwaveDinner = require('../index');
 
 // eslint-disable-next-line no-unused-vars
