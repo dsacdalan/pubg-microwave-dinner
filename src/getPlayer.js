@@ -22,13 +22,10 @@ exports.getSinglePlayer = (key, platformRegion, id, done) => {
     if (err) {
       done(err);
     } else {
-      try {
-        parse.player(data, player => {
-          done(null, player);
-        });
-      } catch (err) {
-        done(err);
-      }
+      parse.player(data, (err, player) => {
+        if (err) done(err);
+        else done(null, player);
+      });
     }
   });
 };
@@ -53,13 +50,10 @@ exports.getPlayers = (key, platformRegion, ids, names, done) => {
       if (err) {
         done(err);
       } else {
-        try {
-          parse.players(data, players => {
-            done(null, players);
-          });
-        } catch (err) {
-          done(err);
-        }
+        parse.players(data, (err, players) => {
+          if (err) done(err);
+          else done(null, players);
+        });
       }
     });
   });

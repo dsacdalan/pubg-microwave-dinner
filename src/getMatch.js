@@ -20,13 +20,10 @@ exports.getMatch = (key, platformRegion, id, done) => {
     if (err) {
       done(err);
     } else {
-      try {
-        parse.match(data, match => {
-          done(null, match);
-        });
-      } catch (err) {
-        done(err);
-      }
+      parse.match(data, (err, match) => {
+        if (err) done(err);
+        else done(null, match);
+      });
     }
   });
 };
@@ -41,7 +38,7 @@ exports.getMatch = (key, platformRegion, id, done) => {
  */
 exports.filterMatchIncludes = (match, filter, done) => {
   
-  // Validate filter
+  // TODO: Validate filter
 
   done(match.included.filter(type => filter.includes(type)));
 };

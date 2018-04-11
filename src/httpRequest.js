@@ -16,10 +16,13 @@ exports.get = (key, path, done) => {
     path: path,
     method: 'GET',
     headers: {
-      'authorization': 'Bearer ' + key,
       'accept': applicationType
     }
   };
+  
+  if (key) {
+    options.headers.authorization = 'Bearer ' + key;
+  }
 
   const req = https.request(options, (res) => {
     var output = '';

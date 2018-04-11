@@ -30,6 +30,14 @@ describe('Client', function() {
   describe('Client with default Platform Region', function() {
     this.timeout(0);
     const client = new microwaveDinner.Client(key, platformRegion);
+    describe('status', function() {
+      it('should return data', function(done) {
+        client.getStatus((err) => {
+          if (err) done(err);
+          else done();
+        });
+      });
+    });
     describe('invalid platform region', function() {
       it('should throw an error', function(done) {
         client.getMatch(playerWithInvalidRegion, (err) => {

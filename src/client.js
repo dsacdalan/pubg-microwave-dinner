@@ -1,12 +1,14 @@
 const getPlayer = require('./getPlayer');
 const getMatch = require('./getMatch');
+const getStatus = require('./getStatus');
 const validate = require('./validate');
 
 // eslint-disable-next-line no-unused-vars
 var Player = require('./class/player/player'); 
 // eslint-disable-next-line no-unused-vars
 var Match = require('./class/match/match');
-
+// eslint-disable-next-line no-unused-vars
+var Status = require('./class/status/status');
 module.exports = class Client {
   /**
    * Creates a new client instance for Microwave Dinner.
@@ -76,6 +78,7 @@ module.exports = class Client {
   }
 
   /**
+   * Gets a match from a Match ID and Platform Region.
    * 
    * @param {object} args 
    * @param {string} args.matchId
@@ -97,5 +100,17 @@ module.exports = class Client {
     } catch (err) {
       done(err);
     }
+  }
+
+  /**
+   * Gets the status of the API.
+   * 
+   * @param {function(Error, Status)} done 
+   */
+  getStatus(done) {
+    getStatus.getStatus((err, status) => {
+      if(err) done (err);
+      else done(null, status);
+    });
   }
 };
