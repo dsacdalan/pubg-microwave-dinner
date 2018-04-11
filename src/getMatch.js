@@ -1,5 +1,5 @@
 const format = require('./format');
-const validate = require('./validate');
+const parse = require('./parse');
 const httpRequest = require('./httpRequest');
 
 // eslint-disable-next-line no-unused-vars
@@ -14,7 +14,6 @@ var Match = require('./class/match/match');
  * @param {function(Error, Match)} done 
  */
 exports.getMatch = (key, platformRegion, id, done) => {
-
   var endpoint = '/matches/' + id;
   var uri = format.fullURI(platformRegion, endpoint);
 
@@ -22,10 +21,13 @@ exports.getMatch = (key, platformRegion, id, done) => {
     if (err) {
       done(err);
     } else {
-      format.match(data, match => {
-        done(null, match);
-      });
+      try {
+        parse.match(data, match => {
+          done(null, match);
+        });
+      } catch (err) {
+        done(err);
+      }
     }
   });
-
 };

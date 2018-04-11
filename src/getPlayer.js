@@ -1,4 +1,5 @@
 const format = require('./format');
+const parse = require('./parse');
 const httpRequest = require('./httpRequest');
 
 // eslint-disable-next-line no-unused-vars
@@ -22,9 +23,13 @@ exports.getSinglePlayer = (key, platformRegion, id, done) => {
     if (err) {
       done(err);
     } else {
-      format.player(data, player => {
-        done(null, player);
-      });
+      try {
+        parse.player(data, player => {
+          done(null, player);
+        });
+      } catch (err) {
+        done(err);
+      }
     }
   });
 };
@@ -50,9 +55,13 @@ exports.getPlayers = (key, platformRegion, ids, names, done) => {
       if (err) {
         done(err);
       } else {
-        format.players(data, players => {
-          done(null, players);
-        });
+        try {
+          parse.players(data, players => {
+            done(null, players);
+          });
+        } catch (err) {
+          done(err);
+        }
       }
     });
   });

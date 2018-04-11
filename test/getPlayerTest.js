@@ -16,49 +16,53 @@ var singleAccountName = [name];
 var accountNames = [name, name2];
 var accountIds = [id, id2];
 
-describe('getSinglePlayer', function() {
-  describe('valid player id', function() {
-    it('should return data', function(done) {
-      getPlayer.getSinglePlayer(key, platformRegion, id, (err) => {
-        if (err) done(err);
-        else done();
+describe('GetPlayer', function() {
+  describe('getSinglePlayer', function() {
+    this.timeout(0);  
+    describe('valid player id', function() {
+      it('should return data', function(done) {
+        getPlayer.getSinglePlayer(key, platformRegion, id, (err) => {
+          if (err) done(err);
+          else done();
+        });
       });
     });
   });
-});
-
-describe('getPlayers', function() {
-  describe('single player name', function() {
-    it('should return data', function(done) {
-      getPlayer.getPlayers(key, platformRegion, null, singleAccountName, (err) => {
-        if (err) done(err);
-        else done();
+  
+  describe('getPlayers', function() {
+    this.timeout(0);  
+    describe('single player name', function() {
+      it('should return data', function(done) {
+        getPlayer.getPlayers(key, platformRegion, null, singleAccountName, (err) => {
+          if (err) done(err);
+          else done();
+        });
       });
     });
-  });
-  describe('single player id', function() {
-    it('should return data', function(done) {
-      getPlayer.getPlayers(key, platformRegion, singlePlayerId, null, (err) => {
-        if (err) done(err);
-        else done();
+    describe('single player id', function() {
+      it('should return data', function(done) {
+        getPlayer.getPlayers(key, platformRegion, singlePlayerId, null, (err) => {
+          if (err) done(err);
+          else done();
+        });
       });
     });
-  });
-
-  describe('multiple player names', function() {
-    it('should return data', function(done) {
-      getPlayer.getPlayers(key, platformRegion, null, accountNames, (err) => {
-        if (err) done(err);
-        else done();
+  
+    describe('multiple player names', function() {
+      it('should return data', function(done) {
+        getPlayer.getPlayers(key, platformRegion, null, accountNames, (err) => {
+          if (err) done(err);
+          else done();
+        });
       });
     });
-  });
-
-  describe('multiple player ids', function() {
-    it('should return data', function(done) {
-      getPlayer.getPlayers(key, platformRegion, accountIds, null, (err) => {
-        if (err) done(err);
-        else done();
+  
+    describe('multiple player ids', function() {
+      it('should return data', function(done) {
+        getPlayer.getPlayers(key, platformRegion, accountIds, null, (err) => {
+          if (err) done(err);
+          else done();
+        });
       });
     });
   });

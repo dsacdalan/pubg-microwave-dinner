@@ -20,10 +20,15 @@ module.exports = class Client {
   constructor(key, platformRegion) {
     if(!key){
       throw new Error('Missing API key.') ;
+    } else {
+      this.key = key;
     }
 
-    this.key = key;
-    this.platformRegion = validate.platformRegion(platformRegion);
+    if(!platformRegion) {
+      this.platformRegion = 'pc-na';
+    } else {
+      this.platformRegion = validate.platformRegion(platformRegion);
+    }
   }
 
   /**
@@ -35,10 +40,11 @@ module.exports = class Client {
    * @param {function(Error, Player)} done 
    */
   getSinglePlayer(args, done)  {
-    validate.getPlayerArgs(args);
+    validate.playerArgs(args);
+
     var currentPlatformRegion = args.platformRegion
-      ? args.platformRegion
-      : validate.platformRegion(this.platformRegion);
+      ? validate.platformRegion(args.platformRegion)
+      : this.platformRegion;
 
     getPlayer.getSinglePlayer(this.key, currentPlatformRegion, args.playerId, (err, player) => {
       if(err) done(err);
@@ -57,11 +63,11 @@ module.exports = class Client {
    * @param {function(Error, Player[])} done 
    */
   getPlayers(args, done) {
-    validate.getPlayersArgs(args);    
+    validate.playersArgs(args);    
 
     var currentPlatformRegion = args.platformRegion
-      ? args.platformRegion
-      : validate.platformRegion(this.platformRegion);
+      ? validate.platformRegion(args.platformRegion)
+      : this.platformRegion;
 
     getPlayer.getPlayers(this.key, currentPlatformRegion, args.playerIds, args.playerNames, (err, players) => {
       if(err) done(err);
@@ -77,13 +83,19 @@ module.exports = class Client {
    * @param {function(Error, Match)} done 
    */
   getMatch(args, done) {
-    var currentPlatformRegion = args.platformRegion
-      ? args.platformRegion
-      : validate.platformRegion(this.platformRegion);
+    try {
+      validate.matchArgs(args, done);      
 
-    getMatch.getMatch(this.key, currentPlatformRegion, args.matchId, (err, match) => {
-      if(err) done(err);
-      else done(null, match);
-    });
+      var currentPlatformRegion = args.platformRegion
+        ? validate.platformRegion(args.platformRegion)
+        : this.platformRegion;
+
+      getMatch.getMatch(this.key, currentPlatformRegion, args.matchId, (err, match) => {
+        if(err) done(err);
+        else done(null, match);
+      });
+    } catch (err) {
+      done(err);
+    }
   }
 };
