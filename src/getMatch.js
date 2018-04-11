@@ -14,8 +14,7 @@ var Match = require('./class/match/match');
  * @param {function(Error, Match)} done 
  */
 exports.getMatch = (key, platformRegion, id, done) => {
-  var endpointPath = '/matches/' + id;
-  var path = format.path(platformRegion, endpointPath);
+  var path = format.path(platformRegion, '/matches/', id);
 
   httpRequest.get(key, path, (err, data) => {
     if (err) {

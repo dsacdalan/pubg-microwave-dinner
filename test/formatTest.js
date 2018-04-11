@@ -126,10 +126,12 @@ describe('Format', function() {
     });
   });
 
-  describe('Format fullURI', function() {
+  describe('Format path', function() {
     it('should work',function() {
-      var expected = 'https://api.playbattlegrounds.com/shards/pc-na/hello';
-      var actual = format.fullURI('pc-na/', 'hello');
+      var expected = '/shards/pc-na/matches/2cd71251-2067-41f2-8cd3-f880e45f14ef';
+      var platformRegion = 'pc-na';
+      var path = '/matches/' + '2cd71251-2067-41f2-8cd3-f880e45f14ef';
+      var actual = format.path(platformRegion, path);
       assert.equal(actual, expected);
     });
   });

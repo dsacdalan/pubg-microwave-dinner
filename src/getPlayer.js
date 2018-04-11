@@ -16,8 +16,7 @@ var Player = require('./class/player/player');
  * @param {function(Error, Player)} done - The callback that handles the response.
  */
 exports.getSinglePlayer = (key, platformRegion, id, done) => {
-  var endpointPath = '/players/' + id;
-  var path = format.path(platformRegion, endpointPath);
+  var path = format.path(platformRegion, '/players/', id);
 
   httpRequest.get(key, path, (err, data) => {
     if (err) {
@@ -48,8 +47,7 @@ exports.getSinglePlayer = (key, platformRegion, id, done) => {
  */
 exports.getPlayers = (key, platformRegion, ids, names, done) => {
   format.playersEndpoint(ids, names, (data) => {
-    var endpointPath = '/players' + data;
-    var path = format.path(platformRegion, endpointPath);
+    var path = format.path(platformRegion, '/players', data);
 
     httpRequest.get(key, path, (err, data) => {
       if (err) {

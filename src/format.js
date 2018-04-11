@@ -1,17 +1,12 @@
-const baseURL = 'https://api.playbattlegrounds.com/shards/';
-
 /**
- * Formats the full URI from the Platform Region and endpoint.
+ * Formats the full path for an enpoint.
  * 
  * @param {string} platformRegion 
- * @param {string} endpoint 
+ * @param {string} path 
+ * @param {string} options
  */
-exports.fullURI = (platformRegion, endpoint) => {
-  return baseURL + platformRegion + endpoint;
-};
-
-exports.path = (platformRegion, path) => {
-  return '/shards/' + platformRegion + path;
+exports.path = (platformRegion, path, options) => {
+  return '/shards/' + platformRegion + path + options;
 };
 
 /**
