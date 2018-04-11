@@ -7,8 +7,8 @@ describe('httpRequest', function() {
   this.timeout(0);
   describe('get request with valid uri', function() {
     it('should return data', function(done) {
-      var uri = 'https://api.playbattlegrounds.com/shards/pc-na/players?filter[playerNames]=cheeseter550';
-      httpRequest.get(key, uri, (err) => {
+      var path = '/shards/pc-na/players?filter[playerNames]=cheeseter550';
+      httpRequest.get(key, path, (err) => {
         if (err) done(err);
         else done();
       });

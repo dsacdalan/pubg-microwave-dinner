@@ -1,4 +1,5 @@
 const request = require('request');
+const https = require('https');
 const format = require('./format');
 
 const applicationType = 'application/vnd.api+json';
@@ -7,28 +8,41 @@ const applicationType = 'application/vnd.api+json';
  * Calls the PUBG API and returns the JSON object.
  * 
  * @param {string} key 
- * @param {URL} uri 
+ * @param {string} path 
  * @param {function(Error, object)} done 
  */
-exports.get = (key, uri, done) => {
+exports.get = (key, path, done) => {
   var options = {
-    'headers': {
-      'authorization': key,
+    hostname: 'api.playbattlegrounds.com',
+    path: path,
+    method: 'GET',
+    headers: {
+      'authorization': 'Bearer ' + key,
       'accept': applicationType
     }
   };
 
-  request.get(uri, options, (err, res, body) => {
-    if (err) {
-      done(err);
-    } else if (res.statusCode !== 200) {
-      var parsedError = JSON.parse(body).errors[0];
-      format.error(res.statusCode, parsedError, (error) => {
-        done(error);
-      });
-    } else {
-      var data = JSON.parse(body);
+  const req = https.request(options, (res) => {
+    var output = '';
+    res.on('data', (chunk) => {
+      output += chunk;
+    });
+
+    res.on('end', () => {
+      if (res.statusCode !== 200) {
+        var parsedError = JSON.parse(output).errors[0];
+        format.error(res.statusCode, parsedError, (error) => {
+          done(error);
+        });
+      }
+      var data = JSON.parse(output);
       done(null, data);
-    }
+    });
+
+    res.on('error', (e) => {
+      done(e);
+    });
   });
+  
+  req.end();
 };

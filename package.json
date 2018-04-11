@@ -1,6 +1,6 @@
 {
   "name": "pubg-microwave-dinner",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Simple wrapper for the PUBG API.",
   "main": "index.js",
   "scripts": {
@@ -17,9 +17,6 @@
   ],
   "author": "Daniel Sacdalan",
   "license": "MIT",
-  "dependencies": {
-    "request": "^2.85.0"
-  },
   "devDependencies": {
     "dotenv": "^5.0.1",
     "eslint": "^4.19.1",

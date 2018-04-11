@@ -8,7 +8,7 @@ module.exports = class MatchRelationships {
     this.rosters = {
       data: data.rosters.data.map(m => new Reference(m.type, m.id))
     };
-    this.rounds = data.rounds.data;
-    this.spectators = data.spectators.data;
+    this.rounds = null;
+    this.spectators = null;
   }
 };

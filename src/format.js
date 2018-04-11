@@ -10,6 +10,10 @@ exports.fullURI = (platformRegion, endpoint) => {
   return baseURL + platformRegion + endpoint;
 };
 
+exports.path = (platformRegion, path) => {
+  return '/shards/' + platformRegion + path;
+};
+
 /**
  * Formats API HTTP errors.
  * 

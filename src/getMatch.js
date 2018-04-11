@@ -14,10 +14,10 @@ var Match = require('./class/match/match');
  * @param {function(Error, Match)} done 
  */
 exports.getMatch = (key, platformRegion, id, done) => {
-  var endpoint = '/matches/' + id;
-  var uri = format.fullURI(platformRegion, endpoint);
+  var endpointPath = '/matches/' + id;
+  var path = format.path(platformRegion, endpointPath);
 
-  httpRequest.get(key, uri, (err, data) => {
+  httpRequest.get(key, path, (err, data) => {
     if (err) {
       done(err);
     } else {
@@ -30,4 +30,19 @@ exports.getMatch = (key, platformRegion, id, done) => {
       }
     }
   });
+};
+
+
+/**
+ * Filters specific include objects from a match.
+ * 
+ * @param {Match} match 
+ * @param {string[]} filter - Options: roster, participant, asset
+ * @param {function(Error, object[])} done 
+ */
+exports.filterMatchIncludes = (match, filter, done) => {
+  
+  // Validate filter
+
+  done(match.included.filter(type => filter.includes(type)));
 };
