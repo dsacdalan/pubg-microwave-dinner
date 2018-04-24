@@ -150,57 +150,121 @@ Microwave dinner includes classes for all API objects:
 ## Player
 Player objects contain aggregated lifetime information about each player.
 
-* **type** - Identifier for this object type ("player")
-* **id** - Player ID
+* **type** (string) - Identifier for this object type ("player")
+* **id** (string) - Player ID
 * **attributes** (PlayerAttributes)
-  * **name** - Player name
-  * **shardId** - Platform-region shard
+  * **name** (string) - Player name
+  * **shardId** (string) - Platform-region shard
   * **stats** - N/A (currently not used)
-  * **createdAt**
-  * **patchVersion** - Version of the game
-  * **titleId** - Identifies the studio and the game
+  * **createdAt** (string($dateTime))
+  * **patchVersion** (string) - Version of the game
+  * **titleId** (string) - Identifies the studio and the game
 * **relationships** (PlayerRelationships) - References to resource objects related to this player
   * **assets** - N/A (currently not used)
   * **matches** 
     * **data** - A list of match ids
-      * **type** - Identifier for this object type ("match")    
-      * **id** - The ID of the match
+      * **type** (string) - Identifier for this object type ("match")    
+      * **id** (string)  - The ID of the match
 * **links**
-  * **schema** - N/A (currently not used)
-  * **self** - Link to this object
+  * **schema** (string) - N/A (currently not used)
+  * **self** (string) - Link to this object
 
 ## Match
 Match objects contain the results of a completed match such as the game mode played, duration, and which players participated.
 
-* **type** - match
-* **id** - Match ID
+* **type** (string) - Identifier for this object type("match")
+* **id** (string) - Match ID
 * **data** (MatchData)
   * **attributes** (MatchAttributes)
-    * **createdAt** - Time of match completion
-    * **duration** - Length of the match
-    * **gameMode** - Game mode played (duo, duo-fpp, solo, solo-fpp, squad, squad-fpp)
-    * **patchVersion** - N/A (currently not used)
-    * **shardId** - Platform-region shard
+    * **createdAt** (string$(dateTime)) - Time of match completion
+    * **duration** (integer) - Length of the match
+    * **gameMode** (string enum) - Game mode played: [duo, duo-fpp, solo, solo-fpp, squad, squad-fpp]
+    * **mapName** (string enum) - Map name: [Desert_Main, Erangel_Main]
+    * **patchVersion** (string) - N/A (currently not used)
+    * **shardId** (string) - Platform-region shard
     * **stats** - N/A (currently not used)
-    * **tags** - Searchable tags
-    * **titleId** - Identifies the studio and game
+    * **tags** - N/A (currently not used)
+    * **titleId** (string) - Identifies the studio and game
   * **relationships** (MatchRelationships)
-    * **assets** - A list of Asset IDs
-      * **type** - Identifier for this object type ("asset")
-      * **id** - The ID of the asset
+    * **assets** (string) - A list of Asset IDs
+      * **type** (string) - Identifier for this object type ("asset")
+      * **id** (string) - The ID of the asset
     * **roster** - A list of Roster IDs
-      * **type** - Identifier for this object type ("roster")
-      * **id** - The ID of the roster
+      * **type** (string) - Identifier for this object type ("roster")
+      * **id** (string) - The ID of the roster
     * **rounds** - N/A (currently not used)
     * **spectators** - N/A (currently not used)
   * **links**
-    * **schmea**
-    * **self**
-* **included** - A list of [Roster](#roster), [Participant](#participant) or [Asset](#asset) objects.
+    * **schmea** (string) - N/A (currently not used) 
+    * **self** (string) - Link to this object
+* **included** - An array of [Roster](#roster), [Participant](#participant) or [Asset](#asset) objects.
 * **links**
+  * **schmea** (string) - N/A (currently not used) 
+  * **self** (string) - Link to this object
 
 ## Roster
+Rosters track the scores of each opposing group of participants. Rosters can have one or many participants depending on the game mode. Roster objects are only meaningful within the context of a match and are not exposed as a standalone resource.
+
+* **id** (string) - Roster ID
+* **attributes** (RosterAttributes)
+  * **shardId** (string) - Platform-region Shard
+  * **stats** (RosterAttributeStats) - Stats particular to rosters
+    * **rank** (integer, min: 1, max: 100) - This roster's placement in the match
+    * **teamId** (integer)
+  * **won** (string) - Indicates if this roster won the match
+* **relationships** (RosterRelationships) - An array of references to participant objects that can be found in the included array
+  * **participants**
+    * **data** - A list of participant IDs
+      * **type** (string) - Identifier for this object type ("participant")
+      * **id** (string) - The ID of the participant
+  * **team** - N/A (currently not used)
 
 ## Participant
+Participant objects represent each player in the context of a match. Participant objects are only meaningful within the context of a match and are not exposed as a standalone resource.
+
+* **type** (string) - Identifier for this object type ("participant")
+* **id** (string)  - Participant ID
+* **attributes** (ParticipantAttributes)
+  * **actor** (string) - N/A (currently not used)
+  * **shardId** (string) - Platform-region shard
+  * **stats** (ParticipantStats) - Participant stats in the context of a match
+    * **DBNOs** (integer, Min: 0)- Number of times this particpant was downed
+    * **assists** (integer, Min: 0)
+    * **boosts** (integer, Min: 0)- Toatl number of boost items used
+    * **damageDealt** (number, Min: 0)
+    * **deathType** (string enum) - [alive, byplayer, suicide]
+    * **headshotKills** (integer, Min: 0)
+    * **heals** (integer, Min: 0) - Number of healing itmes used
+    * **killPlace** (integer, Min: 1, Max: 100) 
+    * **killPoints** (integer, Min: 0) 
+    * **killPointsDelta** (number) - Change in kill points
+    * **killStreaks** (integer, Min: 0) - Total number of kill streaks
+    * **kills**(integer, Min: 0, Max: 99) 
+    * **lastKillPoints** (integer, Min: 0) 
+    * **lastWinPoints** (integer, Min: 0) 
+    * **longestKill** (number, Min: 0)
+    * **mostDamage** (number, Min: 0) - Highest amount of damage dealt with a single attack
+    * **name** (string) - Username of the player associated with this participant
+    * **playerId** (string) - Account ID of the player associated with this participant
+    * **revives** (integer, Min: 0) - Number of times this participant revived others
+    * **rideDistance** (number, Min: 0) - Total distance traveled in vehicles
+    * **roadKills** (integer, Min: 0) - Number of kills while in a vehicle
+    * **teamKills** (integer, Min: 0) 
+    * **timeSurvived** (number, Min: 0)
+    * **vehicleDestroys** (integer, Min: 0) 
+    * **walkDistance** (number, Min: 0)
+    * **weaponsAcquired** (integer, Min: 0) - Total number of weapons picked up
+    * **winPlace** (integer, Min: 1, Max: 100) 
+    * **winPoitns** (integer, Min: 0) 
+    * **winPoitnsDelta** (number) - Change in winpoints 
 
 ## Asset
+Asset objects contain a URL string that links to a telemetry.json file, which will contain an array of event objects that provide further insight into a match.
+
+* **type** (string) - Identifier for this object type ("asset")
+* **id** (string) - The ID of the asset
+* **attributes**  (AssetAttrbiutes)
+  * **URL** (string) - Link to the telemetry.json file
+  * **createdAt** (string*(dateTime)) - Time of telemetry creation
+  * **description** (string) - N/A (currently not used)
+  * **name** (string) - "Telemetry"

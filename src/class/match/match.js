@@ -2,6 +2,7 @@ var MatchData = require('./data/matchData');
 var Roster = require('./roster/roster');
 var Participant = require('./participant/participant');
 var Asset = require('./asset/asset');
+var Links = require('../shared/links');
 
 /**
  * @property {(Roster|Participant|Asset)} included
@@ -10,7 +11,7 @@ module.exports = class Match {
   constructor(data) {
     this.data = new MatchData(data.data);
     this.included = includeArray(data.included);
-    this.links = data.links;
+    this.links = new Links(data.links);
   }
 };
 

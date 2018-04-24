@@ -1,6 +1,6 @@
 {
   "name": "pubg-microwave-dinner",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Simple wrapper for the PUBG API.",
   "main": "index.js",
   "scripts": {
