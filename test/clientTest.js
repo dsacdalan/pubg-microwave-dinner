@@ -29,7 +29,7 @@ var players = {
 describe('Client', function() {
   describe('Client with default Platform Region', function() {
     this.timeout(0);
-    const client = new microwaveDinner.Client(key, platformRegion);
+    const client = new microwaveDinner.client(key, platformRegion);
     describe('status', function() {
       it('should return data', function(done) {
         client.getStatus((err) => {
