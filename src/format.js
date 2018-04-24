@@ -6,7 +6,11 @@
  * @param {string} options
  */
 exports.path = (platformRegion, path, options) => {
-  return '/shards/' + platformRegion + path + options;
+  if (options) {
+    return '/shards/' + platformRegion + path + options;
+  } else {
+    return '/shards/' + platformRegion + path;
+  }
 };
 
 /**
