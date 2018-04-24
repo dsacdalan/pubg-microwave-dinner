@@ -6,7 +6,7 @@ var Status = require('./class/status/status');
  * Formats a player JSON string object to a Player object.
  * 
  * @param {object} data 
- * @param {function(Player)} done
+ * @param {function(Error, Player)} done
  */
 exports.player = (data, done) => {
   try {
@@ -22,7 +22,7 @@ exports.player = (data, done) => {
  * Formtas a player JSON string array object to a Player[].
  * 
  * @param {object} data 
- * @param {function(Player[])} done 
+ * @param {function(Error, Player[])} done 
  */
 exports.players = (data, done) => {
   try {
@@ -38,7 +38,7 @@ exports.players = (data, done) => {
  * Formats a match JSON string object to a Match object.
  * 
  * @param {object} data 
- * @param {function(Match)} done 
+ * @param {function(Error, Match)} done 
  */
 exports.match = (data, done) => {
   try {

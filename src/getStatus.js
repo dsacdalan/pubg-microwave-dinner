@@ -7,7 +7,6 @@ var Status = require('./class/status/status');
 /**
  * Gets a single match from an ID and Platform Region.
  * 
- * @param {string} key
  * @param {function(Error, Status)} done 
  */
 exports.getStatus = (done) => {

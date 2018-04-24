@@ -40,7 +40,7 @@ exports.getSinglePlayer = (key, platformRegion, id, done) => {
  * pc-krjp, pc-na, pc-eu, pc-oc, pc-kakao, pc-sea, pc-sa, or pc-as.
  * @param {string[]} ids 
  * @param {string[]} names 
- * @param {function(error, Player[])} done 
+ * @param {function(Error, Player[])} done 
  */
 exports.getPlayers = (key, platformRegion, ids, names, done) => {
   format.playersEndpoint(ids, names, (data) => {

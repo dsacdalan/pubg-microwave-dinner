@@ -222,7 +222,7 @@ Match objects contain the results of a completed match such as the game mode pla
   * **links**
     * **schmea** (string) - N/A (currently not used)
     * **self** (string) - Link to this object
-* **included** (array[Roster|Participant|Asset]) - An array of [Roster](#roster), [Participant](#participant) or [Asset](#asset) objects.
+* **included** (array[Roster|Participant|Asset]) - An array of [Roster](#roster), [Participant](#participant) and [Asset](#asset) objects.
 * **links**
   * **schmea** (string) - N/A (currently not used)
   * **self** (string) - Link to this object

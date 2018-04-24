@@ -42,6 +42,7 @@ exports.error = (statusCode, error, done) => {
  * 
  * @param {string[]} ids 
  * @param {string[]} names 
+ * @param {function(string)} done
  */
 exports.playersEndpoint = (ids, names, done) => {
   if(ids) {
@@ -67,4 +68,3 @@ exports.playersEndpoint = (ids, names, done) => {
     done('');
   }
 };
-
