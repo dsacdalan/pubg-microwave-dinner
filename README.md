@@ -39,7 +39,6 @@ client.getSinglePlayer(args, (err, player) => {
 Creates a Microwave Dinner application.
 
 ```javascript
-
 const microwaveDinner = require('pubg-microwave-dinner');
 const client = new microwaveDinner.client('YOUR-API-TOKEN', 'pc-na');
 ```
@@ -223,7 +222,7 @@ Match objects contain the results of a completed match such as the game mode pla
   * **links**
     * **schmea** (string) - N/A (currently not used)
     * **self** (string) - Link to this object
-* **included** - An array of [Roster](#roster), [Participant](#participant) or [Asset](#asset) objects.
+* **included** (array[Roster|Participant|Asset]) - An array of [Roster](#roster), [Participant](#participant) or [Asset](#asset) objects.
 * **links**
   * **schmea** (string) - N/A (currently not used)
   * **self** (string) - Link to this object
@@ -267,7 +266,7 @@ Participant objects represent each player in the context of a match. Participant
     * **killPoints** (integer, Min: 0)
     * **killPointsDelta** (number) - Change in kill points
     * **killStreaks** (integer, Min: 0) - Total number of kill streaks
-    * **kills**(integer, Min: 0, Max: 99)
+    * **kills** (integer, Min: 0, Max: 99)
     * **lastKillPoints** (integer, Min: 0)
     * **lastWinPoints** (integer, Min: 0)
     * **longestKill** (number, Min: 0)
@@ -294,6 +293,6 @@ Asset objects contain a URL string that links to a telemetry.json file, which wi
 * **id** (string) - The ID of the asset
 * **attributes**  (AssetAttrbiutes)
   * **URL** (string) - Link to the telemetry.json file
-  * **createdAt** (string*(dateTime)) - Time of telemetry creation
+  * **createdAt** (string$(dateTime)) - Time of telemetry creation
   * **description** (string) - N/A (currently not used)
   * **name** (string) - "Telemetry"
