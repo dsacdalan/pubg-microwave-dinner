@@ -13,6 +13,7 @@ All objects have have been defined so your IDE can show that yummy autocomplete.
   * [Participant](#participant)
   * [Asset](#asset)
 
+Install:
 `npm i pubg-microwave-dinner`
 
 Initialize:
