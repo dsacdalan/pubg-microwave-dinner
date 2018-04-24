@@ -9,9 +9,9 @@ All objects have have been defined so your IDE can show that yummy autocomplete.
 * [Classes](#classes)
   * [Player](#player)
   * [Match](#match)
-## Quick Start
-
-Install :
+  * [Roster](#roster)
+  * [Participant](#participant)
+  * [Asset](#asset)
 
 `npm i pubg-microwave-dinner`
 
