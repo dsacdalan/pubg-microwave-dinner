@@ -1,6 +1,7 @@
 const getPlayer = require('./getPlayer');
 const getMatch = require('./getMatch');
 const getStatus = require('./getStatus');
+const getSeasons = require('./getSeasons');
 const validate = require('./validate');
 
 // eslint-disable-next-line no-unused-vars
@@ -9,6 +10,8 @@ var Player = require('./class/player/player');
 var Match = require('./class/match/match');
 // eslint-disable-next-line no-unused-vars
 var Status = require('./class/status/status');
+// eslint-disable-next-line no-unused-vars
+var Season = require('./class/season/season');
 module.exports = class Client {
   /**
    * Creates a new client instance for Microwave Dinner.
@@ -101,6 +104,28 @@ module.exports = class Client {
       done(err);
     }
   }
+
+  /**
+   * Gets the seasons for a Platform Region.
+   * 
+   * @param {string} [platformRegion]
+   * @param {function(Erro, Season)} done 
+   */
+  getSeasons(platformRegion, done) {
+    try {
+      var currentPlatformRegion = platformRegion
+        ? validate.platformRegion(platformRegion)
+        : this.platformRegion;
+
+      getSeasons.getSeasons(this.key, currentPlatformRegion, (err, season) => {
+        if(err) done(err);
+        else done(null, season);
+      });
+    } catch (err) {
+      done(err);
+    }
+  }
+
 
   /**
    * Gets the status of the API.

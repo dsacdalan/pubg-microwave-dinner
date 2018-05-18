@@ -13,6 +13,7 @@ All objects have have been defined so your IDE can show that yummy autocomplete.
   * [Roster](#roster)
   * [Participant](#participant)
   * [Asset](#asset)
+  * [Season](#season)
 
 Install:
 `npm i pubg-microwave-dinner`
@@ -68,7 +69,7 @@ This is how to initialize the Microwave Dinner client.
 
 ### client.getSinglePlayer(args, done)
 
-Gets a single player.
+Gets a single [player](#player).
 
 ```javascript
 var args = {
@@ -95,7 +96,7 @@ client.getSinglePlayer(args, (err, player) => {
 
 ### client.getPlayers(args, done)
 
-Gets a list of players.
+Gets a list of [players](#player).
 
 ```javascript
 var args = {
@@ -124,7 +125,7 @@ client.getPlayers(args, (err, players) => {
 
 ### client.getMatch(args, done)
 
-Gets a match.
+Gets a [match](#match).
 
 ```javascript
 var args = {
@@ -148,6 +149,27 @@ client.getMatch(args, (err, match) => {
 
 * **err**: If the call was unsuccessful, an Error object will be returned. If it was successful, it will return null.
 * **match**: If the call was successful, a Match object will be returned.
+
+### client.getSeasons([platformRegion], done)
+
+Gets a list of available [seasons](#season).
+
+```javascript
+client.getSeasons('pc-na', (err, seasons) => {
+  if(!err) {
+    console.log(seasons[0].attributes.isCurrentSeason)
+  }
+});
+```
+
+#### platformRegion
+
+* **string**: One of the current PUBG platform regions. Will default to the application's default if none is provided.
+
+#### done(err, seasons)
+
+* **err**: If the call was unsuccessful, an Error object will be returned. If it was successful, it will return null.
+* **seasons**: If the call was successful, a Season array will be returned.
 
 ### client.getStatus(done)
 
@@ -296,3 +318,13 @@ Asset objects contain a URL string that links to a telemetry.json file, which wi
   * **createdAt** (string$(dateTime)) - Time of telemetry creation
   * **description** (string) - N/A (currently not used)
   * **name** (string) - "Telemetry"
+
+## Season
+
+Season objects each contain the ID of a season, which can be used to lookup season information for a player.
+
+* **type** (string) - Identifier for this object type ("season")
+* **id** (string) - The ID of the season
+* **attributes**
+  * **isCurrentSeason** (boolean) - Indicates if the season is active
+  * **isOffseason** (boolean) - Indicates if the season is not active

@@ -82,11 +82,21 @@ describe('Client', function() {
         });
       });
     });
+    describe('seasons', function() {
+      describe('get seasons', function() {
+        it('should return data', function(done) {
+          client.getSeasons(null, (err) => {
+            if (err) done(err);
+            else done();
+          });
+        });
+      });
+    });
   });
   
   describe('Client with a designated Platform Region', function() {
     this.timeout(0);  
-    const client = new microwaveDinner.Client(key, 'xbox-na');
+    const client = new microwaveDinner.client(key, 'xbox-na');
     describe('get valid player with different platform region', function() {
       it('should return data', function(done) {
         client.getSinglePlayer(playerWithRegion, (err) => {

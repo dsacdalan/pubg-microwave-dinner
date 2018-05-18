@@ -3,7 +3,7 @@
  * 
  * @param {string} platformRegion 
  * @param {string} path 
- * @param {string} options
+ * @param {string} [options]
  */
 exports.path = (platformRegion, path, options) => {
   if (options) {

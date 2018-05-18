@@ -1,6 +1,7 @@
 var Player = require('./class/player/player');
 var Match = require('./class/match/match');
 var Status = require('./class/status/status');
+var Season = require('./class/season/season');
 
 /**
  * Formats a player JSON string object to a Player object.
@@ -62,6 +63,22 @@ exports.status = (data, done) => {
     done(null, status);
   }
   catch (err) {
+    done(err);
+  }
+};
+
+/**
+ * Formats a season JSON string object to a Season[].
+ * 
+ * @param {object} data 
+ * @param {function(Error, Season)} done 
+ */
+exports.seasons = (data, done) => {
+  try {
+    var seasons = data.data.map(n => new Season(n));
+    done(null, seasons);
+  }
+  catch(err) {
     done(err);
   }
 };
