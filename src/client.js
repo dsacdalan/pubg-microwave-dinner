@@ -96,7 +96,7 @@ module.exports = class Client {
         ? validate.platformRegion(args.platformRegion)
         : this.platformRegion;
 
-      getMatch.getMatch(this.key, currentPlatformRegion, args.matchId, (err, match) => {
+      getMatch.getMatch(currentPlatformRegion, args.matchId, (err, match) => {
         if(err) done(err);
         else done(null, match);
       });

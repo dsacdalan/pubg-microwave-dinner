@@ -7,16 +7,15 @@ var Match = require('./class/match/match');
 
 /**
  * Gets a single match from an ID and Platform Region.
- * 
- * @param {string} key 
+ *  
  * @param {string} platformRegion 
  * @param {string} id 
  * @param {function(Error, Match)} done 
  */
-exports.getMatch = (key, platformRegion, id, done) => {
+exports.getMatch = (platformRegion, id, done) => {
   var path = format.path(platformRegion, '/matches/', id);
 
-  httpRequest.get(key, path, (err, data) => {
+  httpRequest.get(null, path, (err, data) => {
     if (err) {
       done(err);
     } else {

@@ -19,7 +19,7 @@ var playerWithInvalidRegion = {
 };
 
 var match = {
-  matchId: '2cd71251-2067-41f2-8cd3-f880e45f14ef'
+  matchId: '480198d4-b80e-469a-b752-47882325ddba'
 };
 
 var players = {
