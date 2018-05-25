@@ -357,6 +357,41 @@ Player Season objects contain the season information for a single player.
   * **self** (string)
 * **meta** (object)
 
+### Game Mode Stat
+
+Game Mode stats objects contain a player's aggregated stats for a game mode in the context of a season.
+
+* **assists** (integer)
+* **boosts** (integer)
+* **dBONs** (integer)
+* **dailyKills** (integer)
+* **damageDealt** (number)
+* **days** (integer)
+* **headshotKills** (integer)
+* **heals** (integer)
+* **killPoints** (number)
+* **kills** (integer)
+* **longestKill** (number)
+* **longestTimeSurvived** (number)
+* **losses** (integer)
+* **maxKillStreaks** (integer)
+* **mostSurvivalTime** (number)
+* **revives** (integer)
+* **rideDistance** (number)
+* **roadKills** (integer)
+* **roundMostKills** (integer)
+* **roundsPlayed** (integer)
+* **suicides** (integer)
+* **teamKills** (integer)
+* **timeSurvived** (number)
+* **top10s** (integer)
+* **vehicleDestroys** (integer)
+* **walkDistance** (number)
+* **weaponsAcquired** (integer)
+* **weeklyKills** (integer)
+* **winPoints** (number)
+* **wins** (integer)
+
 ## Status
 
 * **id** (string)
@@ -364,7 +399,6 @@ Player Season objects contain the season information for a single player.
   * **releasedAt** (string)
   * **version** (string)
 
-### Game Mode Stat
 
 ## Shared Objects
 
