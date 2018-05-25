@@ -8,6 +8,7 @@ var platformRegion = 'pc-na';
 
 var id = 'account.6ea11c9dcec747f3ab57c829a129394c';
 var id2 = 'account.068e0cb30d524573ac38958094968d51';
+var seasonId = 'division.bro.official.2018-05';
 var name = 'cheeseter550';
 var name2 = 'Zaith5';
 
@@ -28,7 +29,16 @@ describe('GetPlayer', function() {
       });
     });
   });
-  
+  describe('getPlayerSeason', function() {
+    describe('valid player id and season id', function() {
+      it('should return data', function(done) {
+        getPlayer.getPlayerSeason(key, platformRegion, id, seasonId, (err) => {
+          if (err) done(err);
+          else done();
+        });
+      });
+    });
+  });
   describe('getPlayers', function() {
     describe('single player name', function() {
       it('should return data', function(done) {

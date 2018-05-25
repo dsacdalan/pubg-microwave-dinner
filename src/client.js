@@ -12,6 +12,9 @@ var Match = require('./class/match/match');
 var Status = require('./class/status/status');
 // eslint-disable-next-line no-unused-vars
 var Season = require('./class/season/season');
+// eslint-disable-next-line no-unused-vars
+var PlayerSeason = require('./class/playerSeason/playerSeason');
+
 module.exports = class Client {
   /**
    * Creates a new client instance for Microwave Dinner.
@@ -54,6 +57,28 @@ module.exports = class Client {
     getPlayer.getSinglePlayer(this.key, currentPlatformRegion, args.playerId, (err, player) => {
       if(err) done(err);
       else done(null, player);
+    });
+  }
+
+  /**
+   * Gets the season information for a single player.
+   * 
+   * @param {object} args 
+   * @param {string} args.playerId
+   * @param {string} args.seasonId
+   * @param {string} [args.platformRegion] - Defaults to the client's default Platform Region. 
+   * @param {function(Error, PlayerSeason)} done 
+   */
+  getPlayerSeason(args, done)  {
+    // TODO: Validation
+
+    var currentPlatformRegion = args.platformRegion
+      ? validate.platformRegion(args.platformRegion)
+      : this.platformRegion;
+
+    getPlayer.getPlayerSeason(this.key, currentPlatformRegion, args.playerId, args.seasonId, (err, playerSeason) => {
+      if(err) done(err);
+      else done(null, playerSeason);
     });
   }
 

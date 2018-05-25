@@ -3,7 +3,6 @@
 This is a simple wrapper for the PUBG API v1.0.
 All objects have have been defined so your IDE can show that yummy autocomplete.
 
-* [Quick Start](#quick-start)
 * [Reference](#reference)
   * [Client](#client())
   * [Client Methods](#methods)
@@ -14,6 +13,9 @@ All objects have have been defined so your IDE can show that yummy autocomplete.
   * [Participant](#participant)
   * [Asset](#asset)
   * [Season](#season)
+  * [Player Season](#player-season)
+  * [Status](#status)
+  * [Shared Objects](#shared-objects)
 
 Install:
 `npm i pubg-microwave-dinner`
@@ -328,3 +330,50 @@ Season objects each contain the ID of a season, which can be used to lookup seas
 * **attributes**
   * **isCurrentSeason** (boolean) - Indicates if the season is active
   * **isOffseason** (boolean) - Indicates if the season is not active
+
+## Player Season
+
+Player Season objects contain the season information for a single player.
+
+* **type** (string) - Identifier for this object type ("playerSeason")
+* **attributes** (PlayerSeasonAttributes)
+  * **gameModeStats** (GameModeStats) - See [GameModeStat](#Game-Mode-Stat) for more details.
+    * **duo** (GameModeStat)
+    * **duo_fpp** (GameModeStat)
+    * **solo** (GameModeStat)
+    * **solo_fpp** (GameModeStat)
+    * **squad** (GameModeStat)
+    * **squad_fpp** (GameModeStat)
+* **relationships** (PlayerAttributes) - See [Reference Object](#reference-object) for more details.
+  * **player** (Reference)
+  * **matchesSolo** (Reference)
+  * **matchesSoloFPP** (Reference)
+  * **matchesDuo** (Reference)
+  * **matchesDuoFPP** (Reference)
+  * **matchesSquad** (Reference)
+  * **matchesSquadFPP** (Reference)
+  * **season** (Reference)
+* **links**
+  * **self** (string)
+* **meta** (object)
+
+## Status
+
+* **id** (string)
+* **attributes**
+  * **releasedAt** (string)
+  * **version** (string)
+
+### Game Mode Stat
+
+## Shared Objects
+
+### Reference Object
+
+* **type** (string)
+* **id** (string)
+
+### Link
+
+* **schema** (string) - N/A Currently not in use
+* **self** (string) - Link to this object

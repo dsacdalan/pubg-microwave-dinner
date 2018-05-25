@@ -6,6 +6,7 @@ const dotenv = require('dotenv').config();
 var key = process.env.API_KEY;
 var platformRegion = 'pc-na';
 var playerId = 'account.6ea11c9dcec747f3ab57c829a129394c';
+var seasonId = 'division.bro.official.2018-05';
 var playerWithoutRegion = {
   playerId: playerId
 };
@@ -17,11 +18,13 @@ var playerWithInvalidRegion = {
   playerId: playerId,
   platformRegion: 'bad'
 };
-
+var playerSeasons = {
+  playerId: playerId,
+  seasonId: seasonId
+};
 var match = {
   matchId: '480198d4-b80e-469a-b752-47882325ddba'
 };
-
 var players = {
   playerIds: [playerId]
 };
@@ -61,6 +64,14 @@ describe('Client', function() {
             if (err) done(err);
             else done();
           });
+        });
+      });
+    });
+    describe('get valid player season', function() {
+      it('should return data', function(done) {
+        client.getPlayerSeason(playerSeasons, (err) => {
+          if (err) done(err);
+          else done();
         });
       });
     });
