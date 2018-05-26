@@ -363,7 +363,7 @@ Game Mode stats objects contain a player's aggregated stats for a game mode in t
 
 * **assists** (integer)
 * **boosts** (integer)
-* **dBONs** (integer)
+* **dBNOs** (integer)
 * **dailyKills** (integer)
 * **damageDealt** (number)
 * **days** (integer)
