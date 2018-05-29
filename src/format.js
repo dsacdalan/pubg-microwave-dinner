@@ -68,3 +68,13 @@ exports.playersEndpoint = (ids, names, done) => {
     done('');
   }
 };
+
+/**
+ * Formats a date into simplified extended ISO format (ISO 8601)
+ * 
+ * @param {Date} date 
+ * @param {function(Error, string)} done 
+ */
+exports.ISODate = (date, done) => {
+  done(null, date.toISOString());
+};

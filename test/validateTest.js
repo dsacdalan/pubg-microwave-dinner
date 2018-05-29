@@ -203,4 +203,18 @@ describe('Validate', function() {
       });
     });
   });
+  
+  describe('Validate Retention Window', function() {
+    describe('Many years old', function() {
+      it('should throw an error', function() {
+        assert.throws(
+          () => {
+            var date = new Date('01/01/2010 UTC');
+            validate.sampleRetention(date);
+          },
+          Error
+        );
+      });
+    });
+  });
 });

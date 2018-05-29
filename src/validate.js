@@ -1,4 +1,7 @@
 const platformRegionList = ['xbox-as','xbox-eu','xbox-na','xbox-oc','pc-krjp','pc-na','pc-eu','pc-oc','pc-kakao','pc-sea','pc-sa','pc-as'];
+// Magic number for 2 weeks.
+// Source: https://stackoverflow.com/a/7751977/1701031
+const retentionMilliseconds = 12096e5;
 
 /**
  * Validates that the Platform Region is valid, and defaults to pc-na if it is not.
@@ -55,6 +58,40 @@ exports.matchArgs = (args) => {
   argumentString(args.matchId, functionName, 'matchId');
   argumentString(args.platformRegion, functionName, 'platformRegion');
 };
+
+exports.sampleArgs = (args) => {
+  var functionName = 'getSample';
+  argumentDate(args.startDate, functionName, 'startDate');
+  sampleRetention(args.startDate);
+};
+
+/**
+ * Helper function that validates a date is within the sample retention window.
+ * @param {Date} date 
+ */
+function sampleRetention(date) {
+  if (date !== undefined) {
+    var retention = new Date(Date.now() - retentionMilliseconds);
+    if (date < retention) {
+      throw new Error('The date is outside of the two week retention window');
+    }
+  }
+}
+
+/**
+ * Helper function that validates than an argument is of type string.
+ * 
+ * @param {any} arg 
+ * @param {string} functionName 
+ * @param {string} argName 
+ */
+function argumentDate(arg, functionName, argName) {
+  if (arg !== undefined && typeof arg !== Date) {
+    throw new Error('The function ' + functionName + ' requires a ' + argName + ' of type string that is a parsable date.');
+  }
+}
+
+
 
 /**
  * Helper function that validates that an argument is of type string.

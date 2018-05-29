@@ -399,7 +399,6 @@ Game Mode stats objects contain a player's aggregated stats for a game mode in t
   * **releasedAt** (string)
   * **version** (string)
 
-
 ## Shared Objects
 
 ### Reference Object

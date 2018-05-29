@@ -71,7 +71,7 @@ describe('Format', function() {
         format.playersEndpoint(playerIds, null, (actual) => {
           var expected = '?filter[playerIds]=asdf,1234,xyz';
           if (actual === expected) done();
-          else done(false);
+          else done(new Error());
         });
       });
     });
@@ -81,7 +81,7 @@ describe('Format', function() {
         format.playersEndpoint(null, playerNames, (actual) => {
           var expected = '?filter[playerNames]=asdf,1234,xyz';
           if (actual === expected) done();
-          else done(false);
+          else done(new Error());
         });
       });
     });
@@ -92,7 +92,7 @@ describe('Format', function() {
         format.playersEndpoint(playerIds, playerNames, (actual) => {
           var expected = '?filter[playerIds]=123,xyz&filter[playerNames]=player,player2';
           if (actual === expected) done();
-          else done(false);
+          else done(new Error());
         });
       });
     });
@@ -102,7 +102,7 @@ describe('Format', function() {
         format.playersEndpoint(playerIds, null, (actual) => {
           var expected = '?filter[playerIds]=asdf';
           if (actual === expected) done();
-          else done(false);
+          else done(new Error());
         });
       });
     });
@@ -112,7 +112,7 @@ describe('Format', function() {
         format.playersEndpoint(null, playerNames, (actual) => {
           var expected = '?filter[playerNames]=asdf';
           if (actual === expected) done();
-          else done(false);
+          else done(new Error());
         });
       });
     });
@@ -120,7 +120,7 @@ describe('Format', function() {
       it('should return an empty endpoint', function(done) {
         format.playersEndpoint(null, null, (actual) => {
           if (actual === '') done();
-          else done(false);
+          else done(new Error());
         });
       });
     });
@@ -133,6 +133,16 @@ describe('Format', function() {
       var path = '/matches/' + '2cd71251-2067-41f2-8cd3-f880e45f14ef';
       var actual = format.path(platformRegion, path);
       assert.equal(actual, expected);
+    });
+  });
+
+  describe('Format date', function() {
+    it('should work', function(done) {
+      var date = new Date('01/01/2018 UTC');
+      format.ISODate(date, (err, data) => {
+        if (data == '2018-01-01T00:00:00.000Z') done();
+        else done(true);
+      });
     });
   });
 });
