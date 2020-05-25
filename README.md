@@ -1,5 +1,7 @@
 # Microwave Dinner
 
+## NOTE: THIS REPOSITORY IS NO LONGER MAINTAINED
+
 This is a simple wrapper for the PUBG API v1.0.
 All objects have have been defined so your IDE can show that yummy autocomplete.
 
